@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>ShareRide - Prototype 2</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div
+        class="logo"
+        onclick="showPage('home')">
+
+        ShareRide
+
+    </div>
+
+
+    <div
+        class="nav-links"
+        id="navLinks">
+
+        <button onclick="showPage('home')">
+            Home
+        </button>
+
+        <button onclick="showPage('findRide')">
+            Find Ride
+        </button>
+
+        <button
+            onclick="showPage('offerRide')">
+
+            Offer Ride
+
+        </button>
+
+        <button
+            id="dashboardNav"
+            onclick="showPage('dashboard')"
+            class="hidden">
+
+            Dashboard
+
+        </button>
+
+        <button
+            id="loginNav"
+            onclick="showPage('login')">
+
+            Login
+
+        </button>
+
+        <button
+            id="registerNav"
+            onclick="showPage('register')">
+
+            Register
+
+        </button>
+
+        <button
+            id="logoutNav"
+            onclick="logout()"
+            class="hidden">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section
+    id="home"
+    class="page active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                Car Pooling Prototype 2
+            </span>
+
+            <h1>
+                Share the Ride.<br>
+                Share the Journey.
+            </h1>
+
+            <p>
+                Find affordable rides or offer your
+                empty seats to people traveling in
+                the same direction.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="showPage('findRide')">
+
+                    Find a Ride
+
+                </button>
+
+
+                <button
+                    class="secondary-btn"
+                    onclick="showPage('offerRide')">
+
+                    Offer a Ride
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔍
+            </div>
+
+            <h3>
+                Find Rides
+            </h3>
+
+            <p>
+                Search available rides using
+                source, destination and date.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🚗
+            </div>
+
+            <h3>
+                Offer Rides
+            </h3>
+
+            <p>
+                Publish your journey and share
+                your available seats.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🤝
+            </div>
+
+            <h3>
+                Travel Together
+            </h3>
+
+            <p>
+                Reduce travel costs by
+                sharing journeys.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section
+    id="login"
+    class="page">
+
+    <div class="form-container">
+
+        <h2>
+            Welcome Back
+        </h2>
+
+        <p class="form-subtitle">
+            Login to your ShareRide account
+        </p>
+
+
+        <form
+            onsubmit="login(event)">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                required>
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required>
+
+
+            <button
+                type="submit"
+                class="primary-btn full-width">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <p class="switch-form">
+
+            Don't have an account?
+
+            <span
+                onclick="showPage('register')">
+
+                Create Account
+
+            </span>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REGISTER
+===================================================== -->
+
+<section
+    id="register"
+    class="page">
+
+    <div class="form-container">
+
+        <h2>
+            Create Account
+        </h2>
+
+        <p class="form-subtitle">
+            Join the ShareRide community
+        </p>
+
+
+        <form
+            onsubmit="register(event)">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Enter your name"
+                required>
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Enter your email"
+                required>
+
+
+            <label>
+                Phone
+            </label>
+
+            <input
+                type="tel"
+                id="registerPhone"
+                placeholder="01XXXXXXXXX"
+                required>
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create a password"
+                minlength="6"
+                required>
+
+
+            <button
+                type="submit"
+                class="primary-btn full-width">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <p class="switch-form">
+
+            Already have an account?
+
+            <span
+                onclick="showPage('login')">
+
+                Login
+
+            </span>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+    id="dashboard"
+    class="page">
+
+    <div class="dashboard-container">
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <span class="badge">
+                    Dashboard
+                </span>
+
+                <h2 id="welcomeUser">
+                    Welcome!
+                </h2>
+
+                <p>
+                    Manage your rides and bookings.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <span>
+                    Offered Rides
+                </span>
+
+                <strong id="rideCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    My Bookings
+                </span>
+
+                <strong id="bookingCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Active Rides
+                </span>
+
+                <strong id="activeRideCount">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-actions">
+
+            <div
+                class="dashboard-card"
+                onclick="showPage('offerRide')">
+
+                <div class="dashboard-icon">
+                    🚗
+                </div>
+
+                <h3>
+                    Offer a Ride
+                </h3>
+
+                <p>
+                    Publish your upcoming journey.
+                </p>
+
+            </div>
+
+
+            <div
+                class="dashboard-card"
+                onclick="showPage('findRide')">
+
+                <div class="dashboard-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    Find a Ride
+                </h3>
+
+                <p>
+                    Search for available rides.
+                </p>
+
+            </div>
+
+
+            <div
+                class="dashboard-card"
+                onclick="showPage('myRides')">
+
+                <div class="dashboard-icon">
+                    📋
+                </div>
+
+                <h3>
+                    My Rides
+                </h3>
+
+                <p>
+                    Manage rides you have offered.
+                </p>
+
+            </div>
+
+
+            <div
+                class="dashboard-card"
+                onclick="showPage('bookings')">
+
+                <div class="dashboard-icon">
+                    🎫
+                </div>
+
+                <h3>
+                    My Bookings
+                </h3>
+
+                <p>
+                    View your booked rides.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     OFFER RIDE
+===================================================== -->
+
+<section
+    id="offerRide"
+    class="page">
+
+    <div class="form-container large">
+
+        <h2>
+            Offer a Ride
+        </h2>
+
+        <p class="form-subtitle">
+            Publish your upcoming journey.
+        </p>
+
+
+        <form
+            onsubmit="createRide(event)">
+
+            <div class="form-row">
+
+                <div>
+
+                    <label>
+                        From
+                    </label>
+
+                    <input
+                        type="text"
+                        id="rideSource"
+                        placeholder="e.g. Rajshahi"
+                        required>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        To
+                    </label>
+
+                    <input
+                        type="text"
+                        id="rideDestination"
+                        placeholder="e.g. Dhaka"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div>
+
+                    <label>
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="rideDate"
+                        required>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="rideTime"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div>
+
+                    <label>
+                        Available Seats
+                    </label>
+
+                    <input
+                        type="number"
+                        id="rideSeats"
+                        min="1"
+                        max="8"
+                        required>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Fare per Seat (৳)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="rideFare"
+                        min="0"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn full-width">
+
+                Publish Ride
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FIND RIDE
+===================================================== -->
+
+<section
+    id="findRide"
+    class="page">
+
+    <div class="page-container">
+
+        <h2>
+            Find a Ride
+        </h2>
+
+        <p class="form-subtitle">
+            Search for available rides.
+        </p>
+
+
+        <div class="search-box">
+
+            <div>
+
+                <label>
+                    From
+                </label>
+
+                <input
+                    type="text"
+                    id="searchSource"
+                    placeholder="Rajshahi">
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    To
+                </label>
+
+                <input
+                    type="text"
+                    id="searchDestination"
+                    placeholder="Dhaka">
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="searchDate">
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="searchRides()">
+
+                Search
+
+            </button>
+
+        </div>
+
+
+        <div id="rideResults">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RIDE DETAILS
+===================================================== -->
+
+<section
+    id="rideDetails"
+    class="page">
+
+    <div class="details-container">
+
+        <button
+            class="back-btn"
+            onclick="showPage('findRide')">
+
+            ← Back to rides
+
+        </button>
+
+
+        <div
+            id="rideDetailsContent"
+            class="details-card">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MY RIDES
+===================================================== -->
+
+<section
+    id="myRides"
+    class="page">
+
+    <div class="page-container">
+
+        <h2>
+            My Rides
+        </h2>
+
+        <p class="form-subtitle">
+            Rides you have published.
+        </p>
+
+
+        <div id="myRidesContainer">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BOOKINGS
+===================================================== -->
+
+<section
+    id="bookings"
+    class="page">
+
+    <div class="page-container">
+
+        <h2>
+            My Bookings
+        </h2>
+
+        <p class="form-subtitle">
+            Your booked rides.
+        </p>
+
+
+        <div id="bookingsContainer">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    id="toast"
+    class="toast">
+
+    <span id="toastMessage"></span>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
