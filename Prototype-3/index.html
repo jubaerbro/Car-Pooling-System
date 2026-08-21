@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShareRide - Prototype 3</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="showPage('home')">
+            <span class="logo-icon">🚗</span>
+            <span>Share<strong>Ride</strong> <small class="version-tag">v3</small></span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <button class="nav-item" onclick="showPage('home')">Home</button>
+            <button class="nav-item" onclick="showPage('findRide')">Find Ride</button>
+            <button class="nav-item" onclick="showPage('offerRide')">Offer Ride</button>
+            <button class="nav-item hidden" id="dashboardNav" onclick="showPage('dashboard')">Dashboard</button>
+            <button class="nav-btn btn-secondary" id="loginNav" onclick="showPage('login')">Login</button>
+            <button class="nav-btn btn-primary" id="registerNav" onclick="showPage('register')">Sign Up</button>
+            <button class="nav-btn btn-danger hidden" id="logoutNav" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+<section id="home" class="page active">
+    <div class="hero">
+        <div class="hero-content">
+            <span class="badge">🚀 Prototype 3 Enhanced Edition</span>
+            <h1>Smart, Eco-friendly & <br><span class="gradient-text">Affordable Commutes</span></h1>
+            <p>Connect with verified drivers and commuters going your way. Save money, reduce carbon footprint, and make new connections safely.</p>
+            
+            <div class="hero-buttons">
+                <button class="primary-btn" onclick="showPage('findRide')">🔍 Find a Ride</button>
+                <button class="secondary-btn" onclick="showPage('offerRide')">🚗 Offer a Ride</button>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="mini-stat">
+                    <span class="mini-num">100%</span>
+                    <span class="mini-label">Verified Commuters</span>
+                </div>
+                <div class="mini-stat">
+                    <span class="mini-num">৳ 0</span>
+                    <span class="mini-label">Platform Fee</span>
+                </div>
+                <div class="mini-stat">
+                    <span class="mini-num">500+</span>
+                    <span class="mini-label">Trips Completed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2>Why Choose ShareRide?</h2>
+        <p>Engineered for safety, convenience, and real-time reliability</p>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Booking</h3>
+            <p>Search routes, pick available seats, and get instant digital booking confirmation with live fare calculation.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Verified Profiles & Ratings</h3>
+            <p>Travel with confidence knowing user details, contact information, and driver vehicle notes.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💳</div>
+            <h3>Cash & Digital Split</h3>
+            <p>Transparent per-seat pricing with clear cancellation and passenger management options.</p>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+<section id="login" class="page">
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Welcome Back</h2>
+            <p class="form-subtitle">Log in to manage your journeys and bookings</p>
+        </div>
+
+        <form onsubmit="login(event)">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="e.g. rahim@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="primary-btn full-width">Sign In</button>
+        </form>
+
+        <p class="switch-form">
+            Don't have an account? <span onclick="showPage('register')">Create an Account</span>
+        </p>
+    </div>
+</section>
+
+<!-- =====================================================
+     REGISTER
+===================================================== -->
+<section id="register" class="page">
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Create Account</h2>
+            <p class="form-subtitle">Join thousands of verified commuters across Bangladesh</p>
+        </div>
+
+        <form onsubmit="register(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="registerName" placeholder="e.g. Rahim Ahmed" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="registerEmail" placeholder="e.g. rahim@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="registerPhone" placeholder="017XXXXXXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="registerPassword" placeholder="Minimum 6 characters" minlength="6" required>
+            </div>
+
+            <button type="submit" class="primary-btn full-width">Complete Registration</button>
+        </form>
+
+        <p class="switch-form">
+            Already have an account? <span onclick="showPage('login')">Sign In</span>
+        </p>
+    </div>
+</section>
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+<section id="dashboard" class="page">
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="user-greeting">
+                <span class="badge">Prototype 3 Live Panel</span>
+                <h2 id="welcomeUser">Welcome, Traveler!</h2>
+                <p>Track your rides, booking history, and active routes in real-time.</p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">🚗</div>
+                <div class="stat-info">
+                    <span>Offered Rides</span>
+                    <strong id="rideCount">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">🎫</div>
+                <div class="stat-info">
+                    <span>Active Bookings</span>
+                    <strong id="bookingCount">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">🟢</div>
+                <div class="stat-info">
+                    <span>Active Rides</span>
+                    <strong id="activeRideCount">0</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">৳</div>
+                <div class="stat-info">
+                    <span>Total Trip Value</span>
+                    <strong id="totalSpent">৳0</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-actions">
+            <div class="dashboard-card" onclick="showPage('offerRide')">
+                <div class="dashboard-icon">🚗</div>
+                <h3>Offer a Ride</h3>
+                <p>Publish an upcoming trip & share vehicle costs.</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showPage('findRide')">
+                <div class="dashboard-icon">🔍</div>
+                <h3>Find a Ride</h3>
+                <p>Search routes by city, date & seat count.</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showPage('myRides')">
+                <div class="dashboard-icon">📋</div>
+                <h3>My Offered Rides</h3>
+                <p>Manage passenger requests & ride cancellations.</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showPage('bookings')">
+                <div class="dashboard-icon">🎫</div>
+                <h3>My Bookings</h3>
+                <p>View confirmed tickets & receipt details.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     OFFER RIDE
+===================================================== -->
+<section id="offerRide" class="page">
+    <div class="form-container large">
+        <div class="form-header">
+            <h2>Offer a Ride</h2>
+            <p class="form-subtitle">Publish your itinerary and share vacant seats</p>
+        </div>
+
+        <form onsubmit="createRide(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>From (Pickup Location)</label>
+                    <input type="text" id="rideSource" placeholder="e.g. Rajshahi" required>
+                </div>
+                <div class="form-group">
+                    <label>To (Destination)</label>
+                    <input type="text" id="rideDestination" placeholder="e.g. Dhaka" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Journey</label>
+                    <input type="date" id="rideDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Departure Time</label>
+                    <input type="time" id="rideTime" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Vehicle Model / Type</label>
+                    <input type="text" id="rideVehicle" placeholder="e.g. Toyota Corolla / Sedan" required>
+                </div>
+                <div class="form-group">
+                    <label>Available Seats</label>
+                    <input type="number" id="rideSeats" min="1" max="8" value="3" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Fare per Seat (৳ BDT)</label>
+                <input type="number" id="rideFare" min="0" placeholder="e.g. 500" required>
+            </div>
+
+            <button type="submit" class="primary-btn full-width">🚀 Publish Trip</button>
+        </form>
+    </div>
+</section>
+
+<!-- =====================================================
+     FIND RIDE
+===================================================== -->
+<section id="findRide" class="page">
+    <div class="page-container">
+        <div class="page-heading">
+            <h2>Search Available Rides</h2>
+            <p>Find matches tailored to your travel date and preferred route</p>
+        </div>
+
+        <div class="search-box">
+            <div class="search-field">
+                <label>From</label>
+                <input type="text" id="searchSource" placeholder="e.g. Rajshahi">
+            </div>
+            <div class="search-field">
+                <label>To</label>
+                <input type="text" id="searchDestination" placeholder="e.g. Dhaka">
+            </div>
+            <div class="search-field">
+                <label>Date</label>
+                <input type="date" id="searchDate">
+            </div>
+            <div class="search-buttons">
+                <button class="primary-btn" onclick="searchRides()">🔍 Search</button>
+                <button class="secondary-btn" onclick="resetSearch()">Reset</button>
+            </div>
+        </div>
+
+        <div id="rideResults" class="rides-list-grid"></div>
+    </div>
+</section>
+
+<!-- =====================================================
+     RIDE DETAILS
+===================================================== -->
+<section id="rideDetails" class="page">
+    <div class="details-container">
+        <button class="back-btn" onclick="showPage('findRide')">← Back to search results</button>
+        <div id="rideDetailsContent" class="details-card"></div>
+    </div>
+</section>
+
+<!-- =====================================================
+     MY RIDES
+===================================================== -->
+<section id="myRides" class="page">
+    <div class="page-container">
+        <div class="page-heading">
+            <h2>My Offered Rides</h2>
+            <p>Manage and track trips you have listed for commuters</p>
+        </div>
+        <div id="myRidesContainer" class="rides-list-grid"></div>
+    </div>
+</section>
+
+<!-- =====================================================
+     BOOKINGS
+===================================================== -->
+<section id="bookings" class="page">
+    <div class="page-container">
+        <div class="page-heading">
+            <h2>My Bookings</h2>
+            <p>Your confirmed tickets and previous travel records</p>
+        </div>
+        <div id="bookingsContainer" class="rides-list-grid"></div>
+    </div>
+</section>
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+<div id="toast" class="toast">
+    <span id="toastIcon">ℹ️</span>
+    <span id="toastMessage"></span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
